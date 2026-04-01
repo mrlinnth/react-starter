@@ -50,7 +50,7 @@ Create the Zustand stores and QueryClient singleton. These are the data layer fo
 - **Logic**: This is a module-level singleton. It is NOT the QueryClient used by React's QueryClientProvider (that's in `root-provider.tsx`). This export is for imperative cache operations outside React components (e.g., `queryClient.invalidateQueries` after logout).
 - **Verify**: File exists at `src/lib/queryClient.ts` and exports `queryClient`
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -79,7 +79,7 @@ Create the Zustand stores and QueryClient singleton. These are the data layer fo
 - **Logic**: Simple counter, no persistence. `set` receives the previous state and returns partial new state.
 - **Verify**: File exists, TypeScript compiles without errors
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -131,7 +131,7 @@ Create the Zustand stores and QueryClient singleton. These are the data layer fo
   - Rehydration will be triggered manually in `Layout.tsx` with `useAuthStore.persist.rehydrate()`
 - **Verify**: File exists, TypeScript compiles. The store has `persist` property (needed for `rehydrate()` call later)
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -189,7 +189,7 @@ Create the Zustand stores and QueryClient singleton. These are the data layer fo
   - The existing `THEME_INIT_SCRIPT` in `__root.tsx` handles the very first paint (before React hydrates). This store handles all subsequent theme changes and ensures React state stays in sync
 - **Verify**: File exists, TypeScript compiles without errors
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -199,7 +199,7 @@ Create the Zustand stores and QueryClient singleton. These are the data layer fo
 - **Command**: `git add src/lib/queryClient.ts src/store/ && git commit -m "feat: add zustand stores and queryClient singleton"`
 - **Verify**: `git log --oneline -1` shows the commit
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
