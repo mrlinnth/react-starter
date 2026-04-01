@@ -20,6 +20,9 @@ export function TopNavigation() {
           <Link to="/">Home</Link>
         </Button>
         <Button variant="ghost" asChild>
+          <Link to="/about">About</Link>
+        </Button>
+        <Button variant="ghost" asChild>
           <Link to="/customers">Customers</Link>
         </Button>
         {isAuthenticated ? (
