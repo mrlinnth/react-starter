@@ -101,7 +101,7 @@ Create the new layout components (TopNavigation + Layout) and update the root ro
   - `user` typed as `any` for now since it comes from localStorage (mixed types)
 - **Verify**: File exists, no TypeScript errors
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -140,7 +140,7 @@ Create the new layout components (TopNavigation + Layout) and update the root ro
   - `Outlet` from TanStack Router renders the matched child route
 - **Verify**: File exists, no TypeScript errors
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -270,7 +270,7 @@ function RootLayout() {
 
 - **Verify**: App starts with `pnpm dev`, nav appears at top of page, no Header/Footer from old components
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -280,7 +280,7 @@ function RootLayout() {
 - **Command**: `git add src/components/layout/ src/routes/__root.tsx && git commit -m "feat: add layout components and update root route"`
 - **Verify**: `git log --oneline -1` shows the commit; app at localhost:3000 shows TopNavigation
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 

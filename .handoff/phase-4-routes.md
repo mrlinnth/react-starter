@@ -71,7 +71,7 @@ Create the four page routes: home (counter + tech stack card), customers (protec
           <CardHeader>
             <CardTitle>React Starter</CardTitle>
             <CardDescription>
-              A full-stack React starter with the following tech stack:
+              A full-stack React starter with following tech stack:
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -114,7 +114,7 @@ Create the four page routes: home (counter + tech stack card), customers (protec
 
 - **Verify**: Visit `/` — shows two cards, counter increments/decrements
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -218,7 +218,7 @@ Create the four page routes: home (counter + tech stack card), customers (protec
   - `useQuery` automatically uses the QueryClient provided by the SSR integration in context
 - **Verify**: Visit `/customers` while logged out → redirected to `/login`. Visit while logged in → shows table with 10 rows
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -312,11 +312,11 @@ Create the four page routes: home (counter + tech stack card), customers (protec
   ```
 
 - **Logic**:
-  - Passwords stored and compared in plain text (this is a mock — intentional for the demo)
+  - Passwords stored and compared in plain text (this is a mock — intentional for demo)
   - `useAuthStore.getState().login(user)` updates the store imperatively from outside a component render
 - **Verify**: Submit wrong credentials → see error message. Submit correct credentials → redirected to `/`
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -410,7 +410,7 @@ Create the four page routes: home (counter + tech stack card), customers (protec
 
 - **Verify**: Register with a new email → redirected to `/`, nav shows "Hello, {name}". Try to register same email again → see "Email already registered" error.
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -420,7 +420,7 @@ Create the four page routes: home (counter + tech stack card), customers (protec
 - **Command**: `git add src/routes/ && git commit -m "feat: add home, customers, login, and register pages"`
 - **Verify**: `git log --oneline -3` shows all phase commits
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
