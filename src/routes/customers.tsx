@@ -10,14 +10,7 @@ import {
 } from '#/components/ui/table'
 import { Button } from '#/components/ui/button'
 import { useAuthStore } from '#/store/useAuthStore'
-
-interface User {
-  id: number
-  name: string
-  email: string
-  phone: string
-  company: { name: string }
-}
+import { ApiService } from '#/services/ApiService'
 
 export const Route = createFileRoute('/customers')({
   beforeLoad: () => {
@@ -32,10 +25,9 @@ export const Route = createFileRoute('/customers')({
 })
 
 function CustomersPage() {
-  const { data, isLoading, isError, refetch } = useQuery<User[]>({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['users'],
-    queryFn: () =>
-      fetch('https://jsonplaceholder.typicode.com/users').then((r) => r.json()),
+    queryFn: ApiService.getUsers,
   })
 
   if (isLoading) {

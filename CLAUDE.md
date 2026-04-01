@@ -33,4 +33,6 @@ This is a **TanStack Start** app (SSR-capable React framework built on Vite). Ke
 
 **Theme** — Dark/light/auto mode persisted in `localStorage` under `'theme'`. An inline script in `__root.tsx` applies the theme class to `<html>` before hydration to prevent flash.
 
+**API layer** — `src/lib/api.ts` provides `buildUrl(endpoint, params?)` and `buildRequest(method, body?)`. `buildUrl` prepends `VITE_API_BASE_URL`; `buildRequest` sets JSON headers and injects a Bearer token from `useAuthStore` when present. All endpoint functions live in `src/services/ApiService.ts` and call these helpers. When forking, set `VITE_API_BASE_URL` in `.env` (see `.env.example`).
+
 **Server functions** — Use `createServerFn` from `@tanstack/react-start` for server-side logic callable from components.
