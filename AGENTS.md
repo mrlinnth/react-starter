@@ -15,9 +15,23 @@
 
 - File-based routing via `src/routes/`
 - Router auto-generates `src/routeTree.gen.ts`
-- Root layout in `src/routes/__root.tsx`
+- `src/routes/__root.tsx`: `shellComponent` (HTML shell) + `component` (renders `Layout`)
+- `src/components/layout/Layout.tsx`: renders `TopNavigation` + `<Outlet />`
 - QueryClient in SSR context for dehydrated/rehydrated state
-- Path aliases: `#/` maps to `src/`, `#/components`, `#/lib`, `#/hooks`
+- Path aliases: `#/` maps to `src/`, `#/components`, `#/lib`, `#/hooks`, `#/store`, `#/services`
+
+**State management (Zustand stores in `src/store/`):**
+
+- `useAuthStore` — user + isAuthenticated, persisted to localStorage (`"auth"`)
+- `useCounterStore` — count, ephemeral
+- `useThemeStore` — light/dark theme, persisted to localStorage (`"theme"`), toggles `dark` class on `<html>`
+- All persisted stores use `skipHydration: true`; rehydrate in `Layout.tsx` `useEffect`
+
+**API layer:**
+
+- `src/lib/api.ts` — `buildUrl(endpoint, params?)` and `buildRequest(method, body?)`. Base URL from `VITE_API_BASE_URL`. Auto-injects Bearer token from `useAuthStore`.
+- `src/services/ApiService.ts` — all endpoint functions (e.g. `getUsers()`). Always go through `buildUrl`/`buildRequest`.
+- `src/hooks/` — TanStack Query calls belong here, not inline in route components (e.g. `useCustomers` wraps `useQuery` + `ApiService.getUsers`).
 
 ## Commands
 
@@ -54,24 +68,9 @@ Add shadcn components: `pnpm dlx shadcn@latest add <component>`
 - Components install to: `src/components/ui/`
 - Icons: lucide-react
 
-## Current Task
-
-Phase 1: Setup - Installing dependencies and creating feature branch
-
-- Branch: `feature/todo-spa-implementation`
-- Tasks: Install Zustand, add shadcn Button/Input/Table/Card
-
 ## Git Workflow
 
 1. Work on feature branches, never main
 2. Commit at logical checkpoints with conventional commits
 3. Commit message format: `feat:`, `fix:`, `refactor:`, `chore:`
 4. Never push without explicit permission
-
-## Handoff Files
-
-- `.handoff/phase-1-setup.md` - Phase 1 instructions
-- `docs/PROGRESS.md` - Progress tracking
-- `docs/implementation-checklist.md` - Full task list
-
-After each phase, mark tasks complete in PROGRESS.md and proceed to next handoff file.

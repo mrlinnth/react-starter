@@ -1,213 +1,97 @@
-Welcome to your new TanStack Start app! 
+# React Starter
 
-# Getting Started
+A full-stack React starter template built with TanStack Start. Fork this to get auth, routing, data fetching, state management, and a component library wired up and ready to go.
 
-To run this application:
+## Tech Stack
 
-```bash
-npm install
-npm run dev
-```
+- **[TanStack Start](https://tanstack.com/start)** — SSR-capable React framework on Vite
+- **[TanStack Router](https://tanstack.com/router)** — File-based, type-safe routing
+- **[TanStack Query](https://tanstack.com/query)** — Server-state management with SSR dehydration
+- **[Zustand](https://zustand-demo.pmnd.rs/)** — Client-state management with persistence
+- **[shadcn/ui](https://ui.shadcn.com/)** — Accessible component library (new-york style)
+- **[Tailwind CSS v4](https://tailwindcss.com/)** — Utility-first styling, dark mode support
 
-# Building For Production
+## Features
 
-To build this application for production:
+- **Auth flow** — Register, login, and logout backed by localStorage. Structured for easy JWT swap-in: `login()` accepts a user object so the store requires no changes when connecting a real backend.
+- **Protected routes** — `/customers` redirects to `/login` when unauthenticated, using TanStack Router's `beforeLoad`. SSR-safe (guarded with `typeof window` check).
+- **Data fetching** — TanStack Query with a custom hook pattern (`src/hooks/`). Query calls live in hooks, not inline in components.
+- **API service layer** — `src/lib/api.ts` provides `buildUrl` and `buildRequest` helpers. All endpoints are in `src/services/ApiService.ts`. Configure your base URL via `VITE_API_BASE_URL` and Bearer token injection is handled automatically from the auth store.
+- **Dark mode** — Light/dark toggle persisted to localStorage. Flash-free: an inline script applies the theme class before React hydrates.
+- **SSR-safe Zustand** — Persisted stores use `skipHydration: true` with manual client rehydration, preventing server-side localStorage crashes.
 
-```bash
-npm run build
-```
+## Local Setup
 
-## Testing
+### Prerequisites
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+- Node.js 18+
+- [pnpm](https://pnpm.io/) (`npm install -g pnpm`)
 
-```bash
-npm run test
-```
-
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `npm install @tailwindcss/vite tailwindcss -D`
-
-## Linting & Formatting
-
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
+### Install
 
 ```bash
-npm run lint
-npm run format
-npm run check
+git clone https://github.com/mrlinnth/react-starter.git
+cd react-starter
+pnpm install
 ```
 
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
+### Environment
 
 ```bash
-pnpm dlx shadcn@latest add button
+cp .env.example .env
 ```
 
+Edit `.env` and set `VITE_API_BASE_URL` to your API's base URL. The demo uses `https://jsonplaceholder.typicode.com`.
 
+### Run
 
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
+```bash
+pnpm dev       # http://localhost:3000
+pnpm build     # production build
+pnpm preview   # preview production build
 ```
 
-Then anywhere in your JSX you can use it like so:
+## Development
 
-```tsx
-<Link to="/about">About</Link>
+```bash
+pnpm test      # run tests (Vitest)
+pnpm lint      # ESLint
+pnpm check     # Prettier + ESLint fix
 ```
 
-This will create a link that will navigate to the `/about` route.
+Run a single test file:
 
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
+```bash
+pnpm vitest run src/path/to/file.test.tsx
 ```
 
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
+Add a shadcn component:
 
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
+```bash
+pnpm dlx shadcn@latest add <component>
 ```
 
-## API Routes
+## Project Structure
 
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
+```
+src/
+├── components/
+│   ├── layout/          # TopNavigation, Layout
+│   └── ui/              # shadcn components
+├── hooks/               # custom hooks (e.g. useCustomers)
+├── lib/
+│   ├── api.ts           # buildUrl, buildRequest helpers
+│   └── utils.ts         # cn() utility
+├── routes/              # file-based pages (__root, index, customers, login, register)
+├── services/
+│   └── ApiService.ts    # all API endpoint functions
+├── store/               # Zustand stores (auth, counter, theme)
+└── styles.css           # Tailwind + CSS variables
 ```
 
-## Data Fetching
+## Forking for a Real Project
 
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+1. Set `VITE_API_BASE_URL` in `.env`
+2. Replace the localStorage mock in `login.tsx` / `register.tsx` with real API calls
+3. Update `useAuthStore` user type and `buildRequest` token field to match your JWT payload
+4. Add new endpoints to `ApiService.ts` and new query hooks to `src/hooks/`

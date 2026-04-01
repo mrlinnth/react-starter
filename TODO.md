@@ -100,3 +100,4 @@ All stores use `zustand/middleware` `persist` where applicable.
 2. The exact CLI commands to install dependencies and add the required shadcn/ui components.
 3. Full source code for every file listed in the project structure.
 4. The completed project must work end-to-end after `npm install` and `npm run dev`.
+

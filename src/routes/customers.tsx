@@ -1,5 +1,4 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import { useQuery } from '@tanstack/react-query'
 import {
   Table,
   TableBody,
@@ -10,7 +9,7 @@ import {
 } from '#/components/ui/table'
 import { Button } from '#/components/ui/button'
 import { useAuthStore } from '#/store/useAuthStore'
-import { ApiService } from '#/services/ApiService'
+import { useCustomers } from '#/hooks/useCustomers'
 
 export const Route = createFileRoute('/customers')({
   beforeLoad: () => {
@@ -25,10 +24,7 @@ export const Route = createFileRoute('/customers')({
 })
 
 function CustomersPage() {
-  const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ['users'],
-    queryFn: ApiService.getUsers,
-  })
+  const { data, isLoading, isError, refetch } = useCustomers()
 
   if (isLoading) {
     return <p className="text-muted-foreground">Loading customers...</p>
