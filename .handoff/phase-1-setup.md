@@ -41,7 +41,7 @@ Work through these in order. Each subtask is atomic — complete it fully before
 - **Command**: `git checkout -b feature/todo-spa-implementation`
 - **Verify**: `git branch --show-current` returns `feature/todo-spa-implementation`
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -51,7 +51,7 @@ Work through these in order. Each subtask is atomic — complete it fully before
 - **Command**: `pnpm add zustand`
 - **Verify**: `zustand` appears in `package.json` dependencies; `node_modules/zustand/` exists
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -62,7 +62,7 @@ Work through these in order. Each subtask is atomic — complete it fully before
 - **Note**: Will create `src/components/ui/button.tsx` and possibly update `src/styles.css`
 - **Verify**: `src/components/ui/button.tsx` exists
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -72,7 +72,7 @@ Work through these in order. Each subtask is atomic — complete it fully before
 - **Command**: `pnpm dlx shadcn@latest add input`
 - **Verify**: `src/components/ui/input.tsx` exists
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -82,7 +82,7 @@ Work through these in order. Each subtask is atomic — complete it fully before
 - **Command**: `pnpm dlx shadcn@latest add table`
 - **Verify**: `src/components/ui/table.tsx` exists
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
@@ -92,7 +92,7 @@ Work through these in order. Each subtask is atomic — complete it fully before
 - **Command**: `pnpm dlx shadcn@latest add card`
 - **Verify**: `src/components/ui/card.tsx` exists
 
-**Status**: [ ] Not started
+**Status**: [x] Complete
 
 ---
 
